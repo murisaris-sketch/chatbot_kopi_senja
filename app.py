@@ -26,7 +26,8 @@ def load_vectorstore():
     ]
     # SESUAIKAN: pakai model embedding yang sama dengan di Colab
     emb = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+        model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        encode_kwargs = {"normalize_embeddings": True},
     )
     return FAISS.from_documents(docs, emb)
 
@@ -53,7 +54,10 @@ def tanya(pertanyaan: str, k: int = 4):
             "content": (
                 "Kamu adalah asisten ramah Toko Kopi Senja. "
                 "Jawab HANYA berdasarkan konteks yang diberikan. "
-                "Jika tidak ada di konteks, katakan bahwa kamu belum punya informasinya. "
+                "Jika pertanyaan tidak menyebut cabang tertentu dan konteks memuat "
+                "informasi beberapa cabang, sebutkan informasi tiap cabang yang ada "
+                "di konteks lalu tanyakan cabang mana yang dimaksud. "
+                "Jika benar-benar tidak ada di konteks, katakan kamu belum punya informasinya. "
                 "Jawab singkat dalam Bahasa Indonesia."
             ),
         },
