@@ -40,7 +40,7 @@ vs = load_vectorstore()
 client = load_client()
 
 # SESUAIKAN: nama model Groq yang kamu pakai di Colab
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-120b"
 
 # ===== 2. FUNGSI TANYA (versi Streamlit dari tanya() di notebook) =====
 def tanya(pertanyaan: str, k: int = 4):
@@ -60,7 +60,7 @@ def tanya(pertanyaan: str, k: int = 4):
         {"role": "user", "content": f"KONTEKS:\n{konteks}\n\nPERTANYAAN: {pertanyaan}"},
     ]
     resp = client.chat.completions.create(
-        model=MODEL, messages=pesan, temperature=0.2
+        model=MODEL, messages=pesan, temperature=0.2 ,max_tokens = 1500 , reasoning_effort = "low"
     )
     return resp.choices[0].message.content, hasil
 
