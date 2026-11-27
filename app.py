@@ -18,7 +18,7 @@ def load_vectorstore():
         Document(
             page_content=(
                
-                f"Pertanyaan: {r['Pertanyaan']} "
+                f"pertanyaan: {r['pertanyaan']} "
                 f"Jawaban: {r['Jawaban']}"
             )
         )
