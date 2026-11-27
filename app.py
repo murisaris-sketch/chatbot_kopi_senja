@@ -19,7 +19,7 @@ def load_vectorstore():
             page_content=(
                
                 f"pertanyaan: {r['pertanyaan']} "
-                f"Jawaban: {r['Jawaban']}"
+                f"jawaban: {r['jawaban']}"
             )
         )
         for _, r in df.iterrows()
